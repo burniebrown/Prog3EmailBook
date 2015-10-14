@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
@@ -20,6 +21,14 @@ public class EmailBookController implements Initializable {
     
     @FXML
     private Label label;
+    
+    @FXML
+    private Button addButton;
+    
+    @FXML
+    private void addButtonHandle(ActionEvent event) {
+    
+    }
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
