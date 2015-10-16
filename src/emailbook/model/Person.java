@@ -7,6 +7,14 @@ package emailbook.model;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  * Model class for a person.
@@ -30,6 +38,25 @@ public class Person {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.emailAddress = new SimpleStringProperty(emailAddress);
+    }
+    
+    public void delete() {
+        String sql = "DELETE FROM CONTACTS WHERE FIRSTNAME='" + this.getFirstName() +
+                 "' AND LASTNAME='" + this.getLastName() + "'";
+        try {
+            Connection c = DriverManager.getConnection("jdbc:sqlite:emailcontacts.db");
+            Statement s = c.createStatement();
+            boolean rs = s.execute(sql);
+            if(!rs) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Info");
+                alert.setHeaderText("Information");
+                alert.setContentText("Deleted Succesfully!");
+                alert.showAndWait();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
     
     public String getFirstName() {

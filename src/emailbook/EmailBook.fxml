@@ -7,9 +7,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="351.0" prefWidth="577.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="emailbook.EmailBookController">
+<AnchorPane id="AnchorPane" prefHeight="376.0" prefWidth="577.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="emailbook.EmailBookController">
    <children>
-      <TableView fx:id="personTable" layoutX="49.0" layoutY="55.0" prefHeight="228.0" prefWidth="473.0">
+      <TableView fx:id="personTable" editable="true" layoutX="49.0" layoutY="55.0" prefHeight="228.0" prefWidth="473.0">
         <columns>
           <TableColumn fx:id="firstNameColumn" prefWidth="135.0" text="First Name" />
           <TableColumn fx:id="lastNameColumn" prefWidth="148.0" text="Last Name" />
@@ -25,5 +25,6 @@
       <TextField fx:id="lastNameLabel" layoutX="175.0" layoutY="295.0" prefHeight="25.0" prefWidth="129.0" promptText="Last Name" />
       <TextField fx:id="emailLabel" layoutX="317.0" layoutY="295.0" prefHeight="10.0" prefWidth="150.0" promptText="Email Address" />
       <Button fx:id="addButton" layoutX="481.0" layoutY="295.0" mnemonicParsing="false" onAction="#addButtonHandle" text="ADD" />
+      <Button layoutX="236.0" layoutY="337.0" mnemonicParsing="false" onAction="#deleteButtonHandle" text="Delete Selected" />
    </children>
 </AnchorPane>

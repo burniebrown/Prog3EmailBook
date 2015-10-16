@@ -9,15 +9,18 @@ import emailbook.model.Person;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -56,7 +59,7 @@ public class EmailBookController implements Initializable {
         String email = emailLabel.getText();
         
         try {
-            Connection c = DriverManager.getConnection("jdbc:sqlite:src/database/emailcontacts.db");
+            Connection c = DriverManager.getConnection("jdbc:sqlite:emailcontacts.db");
             Statement s = c.createStatement();
             s.execute("INSERT INTO CONTACTS(FIRSTNAME, LASTNAME, EMAIL)  VALUES ('"
                     + firstName + "','" + lastName +
@@ -65,7 +68,27 @@ public class EmailBookController implements Initializable {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-    }  
+    }
+    
+    @FXML
+    private void deleteButtonHandle() {
+        try {
+            int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
+            if(selectedIndex < 0) {
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("Warning!");
+                alert.setHeaderText("No person selected!");
+                alert.setContentText("Please select a person on the table");
+                alert.showAndWait();
+                return;
+            }
+            Person selectedPerson = personTable.getItems().get(selectedIndex);
+            selectedPerson.delete();
+            personTable.setItems(this.emailBook.getPersonData());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

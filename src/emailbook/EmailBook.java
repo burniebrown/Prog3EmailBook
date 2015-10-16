@@ -23,7 +23,7 @@ public class EmailBook extends Application {
     private ObservableList<Person> personData = FXCollections.observableArrayList();
     
     public EmailBook() throws SQLException {
-        Connection c = DriverManager.getConnection("jdbc:sqlite:src/database/emailcontacts.db");
+        Connection c = DriverManager.getConnection("jdbc:sqlite:emailcontacts.db");
         Statement s = c.createStatement();
         ResultSet rs = s.executeQuery("SELECT * FROM CONTACTS");
         while (rs.next()) {
@@ -54,7 +54,7 @@ public class EmailBook extends Application {
     
     public ObservableList<Person> getPersonData() throws SQLException {
         personData.clear();
-        Connection c = DriverManager.getConnection("jdbc:sqlite:src/database/emailcontacts.db");
+        Connection c = DriverManager.getConnection("jdbc:sqlite:emailcontacts.db");
         Statement s = c.createStatement();
         ResultSet rs = s.executeQuery("SELECT * FROM CONTACTS");
         while (rs.next()) {
